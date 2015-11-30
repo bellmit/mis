@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.syzc.sseip.dao.UserDao">
+<mapper namespace="com.syzc.mis.dao.UserDao">
     <!--<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>-->
     <!--<cache type="org.mybatis.caches.memcached.MemcachedCache"/>-->
     <!--<cache type="org.mybatis.caches.redis.RedisCache"/>-->
 
     <!--center cache configure-->
-    <!--<cache-ref namespace="com.syzc.sseip.dao.CustomerDao"/>-->
+    <!--<cache-ref namespace="com.syzc.mis.dao.CustomerDao"/>-->
 
-    <resultMap id="User" type="com.syzc.sseip.entity.User">
+    <resultMap id="User" type="com.syzc.mis.entity.User">
         <id column="id" property="id"/>
         <result column="real_name" property="realName"/>
         <result column="group_id" property="groupId"/>
         <result column="id_number" property="idNumber"/>
         <result column="limited_ip" property="limitedIp"/>
-        <result column="role" property="role" typeHandler="com.syzc.sseip.dao.handler.RoleHandler"/>
+        <result column="role" property="role" typeHandler="com.syzc.mis.dao.handler.RoleHandler"/>
     </resultMap>
-    <resultMap id="UserDto" type="com.syzc.sseip.entity.UserDto" extends="User">
+    <resultMap id="UserDto" type="com.syzc.mis.entity.UserDto" extends="User">
         <association property="group" column="group_id" select="getGroup"/>
         <association property="lastUserLogon" column="id" select="getLastUserLogon"/>
     </resultMap>
-    <resultMap id="UserDtoAlter" type="com.syzc.sseip.entity.UserDto" extends="User">
+    <resultMap id="UserDtoAlter" type="com.syzc.mis.entity.UserDto" extends="User">
         <association property="group" column="group_id" select="getGroup"/>
         <!--<association property="lastUserLogon" column="id" select="getLastUserLogon"/>-->
     </resultMap>
-    <resultMap id="Group" type="com.syzc.sseip.entity.Group">
+    <resultMap id="Group" type="com.syzc.mis.entity.Group">
         <id column="id" property="id"/>
     </resultMap>
-    <resultMap id="UserLogon" type="com.syzc.sseip.entity.UserLogon">
+    <resultMap id="UserLogon" type="com.syzc.mis.entity.UserLogon">
         <id column="id" property="id"/>
         <result column="logged_on" property="loggedOn"/>
         <result column="user_id" property="userId"/>
     </resultMap>
-    <resultMap id="UserLogonDto" type="com.syzc.sseip.entity.UserLogonDto" extends="UserLogon">
+    <resultMap id="UserLogonDto" type="com.syzc.mis.entity.UserLogonDto" extends="UserLogon">
         <id column="id" property="id"/>
         <association property="user" column="user_id" select="getAlter"/>
     </resultMap>
@@ -247,7 +247,7 @@
         </choose>
         where id=#{userId}
     </update>
-    <select id="getRole" resultType="com.syzc.sseip.entity.enumtype.Role">
+    <select id="getRole" resultType="com.syzc.mis.entity.enumtype.Role">
         select role from user where id=#{id}
     </select>
     <!--关联查询-->

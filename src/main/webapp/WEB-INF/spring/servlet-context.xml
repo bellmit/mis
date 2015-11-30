@@ -44,13 +44,8 @@
                 class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
         <beans:property name="converters">
             <beans:set>
-                <beans:bean class="com.syzc.sseip.controller.converters.HospitalizationTypeConverter"/>
-                <beans:bean class="com.syzc.sseip.controller.converters.DiseaseTypeConverter"/>
-                <beans:bean class="com.syzc.sseip.controller.converters.RoleConverter"/>
-                <beans:bean class="com.syzc.sseip.controller.converters.SexConverter"/>
-                <beans:bean class="com.syzc.sseip.controller.converters.WebsiteConverter"/>
-                <beans:bean class="com.syzc.sseip.controller.converters.CallStateConverter"/>
-                <beans:bean class="com.syzc.sseip.controller.converters.WeightConverter"/>
+                <beans:bean class="com.syzc.mis.controller.converters.RoleConverter"/>
+                <beans:bean class="com.syzc.mis.controller.converters.SexConverter"/>
             </beans:set>
         </beans:property>
     </beans:bean>

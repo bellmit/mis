@@ -57,12 +57,12 @@
                     </array>
                 </property>
         -->
-        <property name="typeHandlersPackage" value="com.syzc.sseip.dao.handler"/>
+        <property name="typeHandlersPackage" value="com.syzc.mis.dao.handler"/>
     </bean>
 
     <!-- 配置dao -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.syzc.sseip.dao"/>
+        <property name="basePackage" value="com.syzc.mis.dao"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
 
@@ -94,7 +94,7 @@
     <aop:config>
         <!--设置pointCut表示哪些方法要加入事务处理-->
         <aop:pointcut id="allMethods"
-                      expression="execution(* com.syzc.sseip.service.*.*(..))"/>
+                      expression="execution(* com.syzc.mis.service.*.*(..))"/>
         <!--通过advisor来确定具体要加入事务控制的方法-->
         <aop:advisor advice-ref="txAdvice" pointcut-ref="allMethods"/>
     </aop:config>
