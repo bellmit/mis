@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.syzc.sseip.dao.UserDao">
+    <!--<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>-->
+    <!--<cache type="org.mybatis.caches.memcached.MemcachedCache"/>-->
+    <!--<cache type="org.mybatis.caches.redis.RedisCache"/>-->
+
+    <!--center cache configure-->
+    <!--<cache-ref namespace="com.syzc.sseip.dao.CustomerDao"/>-->
+
+    <resultMap id="User" type="com.syzc.sseip.entity.User">
+        <id column="id" property="id"/>
+        <result column="real_name" property="realName"/>
+        <result column="group_id" property="groupId"/>
+        <result column="id_number" property="idNumber"/>
+        <result column="limited_ip" property="limitedIp"/>
+        <result column="role" property="role" typeHandler="com.syzc.sseip.dao.handler.RoleHandler"/>
+    </resultMap>
+    <resultMap id="UserDto" type="com.syzc.sseip.entity.UserDto" extends="User">
+        <association property="group" column="group_id" select="getGroup"/>
+        <association property="lastUserLogon" column="id" select="getLastUserLogon"/>
+    </resultMap>
+    <resultMap id="UserDtoAlter" type="com.syzc.sseip.entity.UserDto" extends="User">
+        <association property="group" column="group_id" select="getGroup"/>
+        <!--<association property="lastUserLogon" column="id" select="getLastUserLogon"/>-->
+    </resultMap>
+    <resultMap id="Group" type="com.syzc.sseip.entity.Group">
+        <id column="id" property="id"/>
+    </resultMap>
+    <resultMap id="UserLogon" type="com.syzc.sseip.entity.UserLogon">
+        <id column="id" property="id"/>
+        <result column="logged_on" property="loggedOn"/>
+        <result column="user_id" property="userId"/>
+    </resultMap>
+    <resultMap id="UserLogonDto" type="com.syzc.sseip.entity.UserLogonDto" extends="UserLogon">
+        <id column="id" property="id"/>
+        <association property="user" column="user_id" select="getAlter"/>
+    </resultMap>
+
+    <insert id="add" useGeneratedKeys="true" keyProperty="entity.id">
+        INSERT INTO user (added,username, password, real_name, age,id_number, address,phone,role,group_id,limited_ip)
+        VALUE
+        (
+        now(),
+        #{entity.username},
+        sha2(concat('!a1@B2c3D4e5F6g7', #{entity.password}, '#h4$I5j6K7l8M9n0'), 256),
+        #{entity.realName},
+        #{entity.age},
+        #{entity.idNumber},
+        <choose>
+            <when test="entity.address!=null and entity.address!=''">#{entity.address}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
+        <choose>
+            <when test="entity.phone!=null and entity.phone!=''">#{entity.phone}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
+        <choose>
+            <when test="entity.role!=null">
+                #{entity.role}
+            </when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
+        <choose>
+            <when test="entity.groupId!=null and entity.groupId!=''">#{entity.groupId}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
+        <choose>
+            <when test="entity.limitedIp!=null and entity.limitedIp!=''">#{entity.limitedIp}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        );
+    </insert>
+    <delete id="remove">
+        DELETE FROM user
+        WHERE id = #{userId};
+    </delete>
+    <update id="update">
+        UPDATE user
+        SET username = #{entity.username}, real_name = #{entity.realName},
+        age =
+        <choose>
+            <when test="entity.age!=null and entity.age!=''">#{entity.age}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
+        id_number =
+        <choose>
+            <when test="entity.idNumber!=null and entity.idNumber!=''">#{entity.idNumber}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
+        address =
+        <choose>
+            <when test="entity.address!=null and entity.address!=''">#{entity.address}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
+        phone =
+        <choose>
+            <when test="entity.phone!=null and entity.phone!=''">#{entity.phone}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
+        group_id =
+        <choose>
+            <when test="entity.groupId==''">NULL</when>
+            <otherwise>#{entity.groupId}</otherwise>
+        </choose>
+        ,
+        role =#{entity.role},
+        limited_ip =
+        <choose>
+            <when test="entity.limitedIp!=null and entity.limitedIp!=''">#{entity.limitedIp}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        WHERE id = #{entity.id};
+    </update>
+    <select id="get" resultMap="UserDto">
+        SELECT
+        *
+        FROM user
+        WHERE id = #{userId};
+    </select>
+    <select id="getAlter" resultMap="UserDtoAlter">
+        SELECT
+        *
+        FROM user
+        WHERE id = #{userId};
+    </select>
+    <select id="count" resultType="Long">
+        SELECT count(1)
+        FROM user;
+    </select>
+    <select id="list" resultMap="UserDto">
+        SELECT
+        *
+        FROM user order by id DESC
+        LIMIT #{offset}, #{size};
+    </select>
+    <select id="listAll" resultMap="UserDto">
+        SELECT
+        *
+        FROM user order by real_name DESC
+    </select>
+
+    <select id="listByGroup" resultMap="UserDto">
+        SELECT
+        *
+        FROM user where group_id=#{groupId}
+        order by id DESC
+        LIMIT #{offset}, #{size};
+    </select>
+    <select id="listAllByGroup" resultMap="UserDto">
+        select * from user where group_id=#{groupId} limit 1000;
+    </select>
+    <select id="countByGroup" resultType="Long">
+        select count(1) from user where group_id=#{groupId}
+    </select>
+    <select id="listByRole" resultMap="UserDto">
+        SELECT
+        *
+        FROM user where role=#{role}
+        order by id DESC
+        LIMIT #{offset}, #{size};
+    </select>
+    <select id="countByRole" resultType="Long">
+        select count(1) from user where role=#{role}
+    </select>
+    <update id="updateInfo">
+        UPDATE user
+        SET real_name = #{entity.realName},
+        age = #{entity.age},
+        id_number =
+        <choose>
+            <when test="entity.idNumber!=null and entity.idNumber!=''">#{entity.idNumber}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ，
+        address =
+        <choose>
+            <when test="entity.address!=null and entity.address!=''">#{entity.address}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
+        phone =
+        <choose>
+            <when test="entity.phone!=null and entity.phone!=''">#{entity.phone}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        WHERE id = #{entity.id};
+    </update>
+    <update id="updateResetPassword">
+        UPDATE user
+        SET password = sha2(concat('!a1@B2c3D4e5F6g7', #{password}, '#h4$I5j6K7l8M9n0'), 256)
+        WHERE id = #{id};
+    </update>
+    <update id="updatePassword">
+        UPDATE user
+        SET password = sha2(concat('!a1@B2c3D4e5F6g7', #{newPassword}, '#h4$I5j6K7l8M9n0'), 256)
+        WHERE id = #{id} AND password = sha2(concat('!a1@B2c3D4e5F6g7', #{oldPassword}, '#h4$I5j6K7l8M9n0'), 256);
+    </update>
+    <select id="existUsername" resultType="Boolean">
+        SELECT count(1) > 0
+        FROM user
+        WHERE username = #{username};
+    </select>
+    <select id="login" resultMap="UserDto">
+        SELECT
+        *
+        FROM user
+        where username = #{username}
+        AND password = sha2(concat('!a1@B2c3D4e5F6g7', #{password}, '#h4$I5j6K7l8M9n0'), 256)
+        AND (isnull(limited_ip) OR limited_ip=#{ip})
+        limit 1;
+    </select>
+    <select id="login2" resultMap="UserDto">
+        SELECT
+        *
+        FROM user
+        where username = #{username}
+        AND password = sha2(concat('!a1@B2c3D4e5F6g7', #{password}, '#h4$I5j6K7l8M9n0'), 256)
+        AND (isnull(limited_ip) OR limited_ip = #{ip,typeHandler=org.apache.ibatis.type.ByteArrayTypeHandler})
+        limit 1;
+    </select>
+    <update id="updateGroup">
+        update user set group_id=
+        <choose>
+            <when test="groupId!=null and groupId!=''">#{groupId}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        where id=#{userId};
+    </update>
+    <!--update user set role=#{role,typeHandler=RoleHandler,javaType=Role} where id=#{userId}-->
+    <update id="updateRole">
+        update user set role=#{role} where id=#{userId}
+    </update>
+    <update id="updateLimitedIp">
+        update user set limited_ip=
+        <choose>
+            <when test="ip==''">NULL</when>
+            <otherwise>#{ip}</otherwise>
+        </choose>
+        where id=#{userId}
+    </update>
+    <select id="getRole" resultType="com.syzc.sseip.entity.enumtype.Role">
+        select role from user where id=#{id}
+    </select>
+    <!--关联查询-->
+    <select id="getGroup" resultMap="Group">
+        SELECT
+        `id`,
+        `name`,
+        `description`
+        FROM `group`
+        WHERE id = #{id};
+    </select>
+
+    <select id="listUserLogonByUser" resultMap="UserLogon">
+        SELECT *
+        FROM user_logon
+        WHERE user_id = #{id}
+        ORDER BY id DESC limit #{offset},#{size}
+    </select>
+    <select id="countUserLogonByUser" resultType="Long">
+        SELECT count(1)
+        FROM user_logon
+        WHERE user_id = #{id}
+    </select>
+    <select id="getLastUserLogon" parameterType="Long" resultMap="UserLogon">
+        SELECT *
+        FROM user_logon
+        WHERE user_id = #{id} order by id desc limit 1;
+    </select>
+    <insert id="insertUserLogon">
+        INSERT INTO user_logon (logged_on, user_id, ip)
+        VALUE (now(), #{userLogon.userId}, #{userLogon.ip});
+    </insert>
+    <update id="updateUserLogon">
+        UPDATE user_logon
+        SET logged_on=now(), ip = #{userLogon.ip}
+        where user_id= #{userLogon.userId}
+    </update>
+
+    <select id="filterUserLogon" resultMap="UserLogonDto">
+        select user_logon.* from user_logon join user on `user`.id = user_logon.user_id
+        <where>
+            <if test="query.userId!=null">
+                user_logon.user_id=#{query.userId}
+            </if>
+            <if test="query.realName!=null and query.realName!=''">
+                and `user`.real_name=#{query.realName}
+            </if>
+            <if test="query.username!=null and query.username!=''">
+                and `user`.username=#{query.username}
+            </if>
+            <if test="query.ip!=null and query.ip!=''">
+                and user_logon.ip=#{query.ip}
+            </if>
+            <if test="query.start!= null">
+                and user_logon.logged_on &gt;= #{query.start}
+            </if>
+            <if test="query.end != null">
+                and user_logon.logged_on &lt;= #{query.end}
+            </if>
+        </where>
+        order by user_logon.id desc
+        limit #{offset},#{size,javaType=Short}
+    </select>
+    <select id="countFilterUserLogon" resultType="Long">
+        select count(1) from user_logon join user on `user`.id = user_logon.user_id
+        <where>
+            <if test="query.userId!=null">
+                user_logon.user_id=#{query.userId}
+            </if>
+            <if test="query.realName!=null and query.realName!=''">
+                and `user`.real_name=#{query.realName}
+            </if>
+            <if test="query.username!=null and query.username!=''">
+                and `user`.username=#{query.username}
+            </if>
+            <if test="query.ip!=null and query.ip!=''">
+                and user_logon.ip=#{query.ip}
+            </if>
+            <if test="query.start!= null">
+                and user_logon.logged_on &gt;= #{query.start}
+            </if>
+            <if test="query.end != null">
+                and user_logon.logged_on &lt;= #{query.end}
+            </if>
+        </where>
+    </select>
+
+    <select id="qqq" resultType="_byte[]">
+        select #{ip,typeHandler=org.apache.ibatis.type.ByteArrayTypeHandler};
+    </select>
+    <select id="qqq2" resultType="Integer">
+        select count(1) from ip where ip= #{ip,typeHandler=org.apache.ibatis.type.ByteArrayTypeHandler}
+    </select>
+    <select id="qqq3" resultType="Integer">
+        select count(1) from ip where ip= #{ip,typeHandler=org.apache.ibatis.type.ByteArrayTypeHandler}
+    </select>
+</mapper>
