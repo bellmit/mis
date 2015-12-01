@@ -1,7 +1,7 @@
 package com.syzc.mis.service;
 
-import com.syzc.sseip.dao.BaseDao;
-import com.syzc.sseip.util.Page;
+import com.syzc.mis.dao.mysql.BaseDao;
+import com.syzc.util.Page;
 
 import java.util.List;
 

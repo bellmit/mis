@@ -1,8 +1,7 @@
 package com.syzc.mis.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.syzc.sseip.entity.User;
-import com.syzc.sseip.entity.enumtype.Role;
+import com.syzc.mis.entity.User;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,11 +21,6 @@ public class ManagementController {
     @RequestMapping(value = "/default")
     public String defaultPage(HttpSession session) {
         User user = (User) session.getAttribute("loginUser");
-        if (user.getRole() == Role.ADMIN || user.getRole() == Role.TELADMIN) {
-            return "redirect:/customer/filter";
-        } else if (user.getRole() == Role.EMPLOYEE) {
-            return "redirect:/customer/filter-own";
-        }
         return "redirect:about:blank";
     }
 

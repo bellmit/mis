@@ -22,8 +22,8 @@ public enum HosErrorCode {
     }
 
     public static void main(String[] args) {
-        System.out.println(com.syzc.sseip.util.HosErrorCode.A.code);
-        System.out.println(com.syzc.sseip.util.HosErrorCode.A.level);
-        System.out.println(com.syzc.sseip.util.HosErrorCode.A);
+        System.out.println(HosErrorCode.A.code);
+        System.out.println(HosErrorCode.A.level);
+        System.out.println(HosErrorCode.A);
     }
 }

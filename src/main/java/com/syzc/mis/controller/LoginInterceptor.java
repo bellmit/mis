@@ -1,7 +1,7 @@
 package com.syzc.mis.controller;
 
-import com.syzc.sseip.service.UserService;
-import com.syzc.sseip.util.UrlComponentUtil;
+import com.syzc.mis.service.UserService;
+import com.syzc.util.UrlComponentUtil;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;

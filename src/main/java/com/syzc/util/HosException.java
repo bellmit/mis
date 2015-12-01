@@ -50,7 +50,6 @@ public class HosException extends RuntimeException {
     /**
      * 不必然生成new的对象。e是当前类的实例的时候不生成新的。
      *
-     * @param e     包裹异常
      * @param msg   填写消息
      * @param level 错误等级，可以是空的
      * @return 包裹起来异常的本类实例

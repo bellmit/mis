@@ -1,9 +1,8 @@
 package com.syzc.util;
 
-import com.syzc.sseip.util.HosException;
 import org.apache.log4j.Level;
 
-public class NotExistException extends com.syzc.sseip.util.HosException {
+public class NotExistException extends HosException {
     protected NotExistException(Level level) {
         super("目标不存在", level);
     }

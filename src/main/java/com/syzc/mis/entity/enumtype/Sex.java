@@ -23,24 +23,24 @@ public enum Sex {
         return textName;
     }
 
-    public static com.syzc.sseip.entity.enumtype.Sex get(Integer code) {
+    public static Sex get(Integer code) {
         if (code == null) {
             return null;
         }
         return map.get(code);
     }
 
-    private static Map<Integer, com.syzc.sseip.entity.enumtype.Sex> map = new HashMap<>();
+    private static Map<Integer, Sex> map = new HashMap<>();
 
     static {
-        for (com.syzc.sseip.entity.enumtype.Sex r : com.syzc.sseip.entity.enumtype.Sex.values()) {
+        for (Sex r : Sex.values()) {
             map.put(r.code, r);
         }
     }
 
     public static void main(String[] args) {
-        System.out.println(JSON.toJSONString(com.syzc.sseip.entity.enumtype.Sex.values(), true));
-        for (com.syzc.sseip.entity.enumtype.Sex w : com.syzc.sseip.entity.enumtype.Sex.values()) {
+        System.out.println(JSON.toJSONString(Sex.values(), true));
+        for (Sex w : Sex.values()) {
             System.out.println(w.getTextName());
             System.out.println(w.getCode());
         }

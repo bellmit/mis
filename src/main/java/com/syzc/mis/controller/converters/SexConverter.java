@@ -1,6 +1,6 @@
 package com.syzc.mis.controller.converters;
 
-import com.syzc.sseip.entity.enumtype.Sex;
+import com.syzc.mis.entity.enumtype.Sex;
 import org.springframework.core.convert.converter.Converter;
 
 public class SexConverter implements Converter<String, Sex> {

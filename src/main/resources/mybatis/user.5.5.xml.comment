@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.syzc.mis.dao.UserDao">
+<mapper namespace="com.syzc.mis.dao.mysql.UserDao">
     <!--<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>-->
     <!--<cache type="org.mybatis.caches.memcached.MemcachedCache"/>-->
     <!--<cache type="org.mybatis.caches.redis.RedisCache"/>-->
 
     <!--center cache configure-->
-    <!--<cache-ref namespace="com.syzc.mis.dao.CustomerDao"/>-->
+    <!--<cache-ref namespace="com.syzc.mis.dao.mysql.CustomerDao"/>-->
 
     <resultMap id="User" type="com.syzc.mis.entity.User">
         <id column="id" property="id"/>
         <result column="real_name" property="realName"/>
-        <result column="group_id" property="groupId"/>
         <result column="id_number" property="idNumber"/>
         <result column="limited_ip" property="limitedIp"/>
-        <result column="role" property="role" typeHandler="com.syzc.mis.dao.handler.RoleHandler"/>
     </resultMap>
     <resultMap id="UserDto" type="com.syzc.mis.entity.UserDto" extends="User">
         <association property="group" column="group_id" select="getGroup"/>

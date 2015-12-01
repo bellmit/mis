@@ -1,6 +1,6 @@
 package com.syzc.mis.controller;
 
-import com.syzc.sseip.util.HosException;
+import com.syzc.util.HosException;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ControllerAdvice;

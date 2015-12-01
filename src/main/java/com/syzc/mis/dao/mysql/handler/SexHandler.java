@@ -1,6 +1,6 @@
-package com.syzc.mis.dao.handler;
+package com.syzc.mis.dao.mysql.handler;
 
-import com.syzc.sseip.entity.enumtype.Sex;
+import com.syzc.mis.entity.enumtype.Sex;
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.MappedTypes;
 import org.apache.ibatis.type.TypeHandler;

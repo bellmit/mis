@@ -1,11 +1,7 @@
-package com.syzc.mis.dao;
+package com.syzc.mis.dao.mysql;
 
-import com.syzc.sseip.dao.BaseDao;
-import com.syzc.sseip.dao.UserLogonQueryDto;
-import com.syzc.sseip.entity.User;
-import com.syzc.sseip.entity.UserLogon;
-import com.syzc.sseip.entity.UserLogonDto;
-import com.syzc.sseip.entity.enumtype.Role;
+import com.syzc.mis.dao.mysql.BaseDao;
+import com.syzc.mis.entity.User;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -16,10 +12,6 @@ public interface UserDao extends BaseDao<User> {
     List<User> listByGroup(@Param("groupId") Long groupId, @Param("offset") Long offset, @Param("size") Byte size);
 
     Long countByGroup(Long groupId);
-
-    List<User> listByRole(@Param("role") Role role, @Param("offset") Long offset, @Param("size") Byte size);
-
-    Long countByRole(Role role);
 
 //    Boolean updateInfo(@Param("user") User user);
 
@@ -43,28 +35,14 @@ public interface UserDao extends BaseDao<User> {
 
     Boolean updateGroup(@Param("userId") Long userId, @Param("groupId") Long groupId);
 
-    Boolean updateRole(@Param("userId") Long userId, @Param("role") Role role);
-
     Boolean updateLimitedIp(@Param("userId") Long userId, @Param("ip") String ip);
 
-    Role getRole(Long id);
-
-    Boolean insertUserLogon(@Param("userLogon") UserLogon userLogon);
-
-    Boolean updateUserLogon(@Param("userLogon") UserLogon userLogon);
-
     Boolean updateInfo(@Param("entity") User user);
-
-    List<UserLogon> listUserLogonByUser(@Param("id") Long id, @Param("offset") Long offset, @Param("size") Short size);
 
     Long countUserLogonByUser(@Param("id") Long id);
 
     // limit 1000
     List<User> listAllByGroup(Long groupId);
-
-    List<UserLogonDto> filterUserLogon(@Param("query") UserLogonQueryDto query, @Param("offset") Long offset, @Param("size") Short size);
-
-    Long countFilterUserLogon(@Param("query") UserLogonQueryDto query);
 
     Object qqq(@Param("ip") byte[] ip);
 

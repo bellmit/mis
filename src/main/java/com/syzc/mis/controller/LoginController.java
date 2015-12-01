@@ -1,9 +1,8 @@
 package com.syzc.mis.controller;
 
 import com.google.code.kaptcha.Producer;
-import com.syzc.sseip.entity.User;
-import com.syzc.sseip.entity.UserLogon;
-import com.syzc.sseip.service.UserService;
+import com.syzc.mis.entity.User;
+import com.syzc.mis.service.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -82,12 +81,6 @@ public class LoginController {
 //        ContextLoader.getCurrentWebApplicationContext().getServletContext().getServletContextName()
             return "/login";
         }
-
-        UserLogon userLogon;
-        userLogon = new UserLogon();
-        userLogon.setIp(addr);
-        userLogon.setUserId(login.getId());
-        userService.saveLogonInfo(userLogon);
 
         httpSession.setAttribute("loginUser", login);
         httpSession.setAttribute("loginUserId", login.getId());

@@ -57,12 +57,12 @@
                     </array>
                 </property>
         -->
-        <property name="typeHandlersPackage" value="com.syzc.mis.dao.handler"/>
+        <property name="typeHandlersPackage" value="com.syzc.mis.dao.mysql.handler"/>
     </bean>
 
     <!-- 配置dao -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.syzc.mis.dao"/>
+        <property name="basePackage" value="com.syzc.mis.dao.mysql"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
 

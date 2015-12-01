@@ -1,6 +1,5 @@
 package com.syzc.util;
 
-import com.syzc.sseip.util.HosException;
 import org.apache.log4j.Level;
 
 public class AuthException extends HosException {

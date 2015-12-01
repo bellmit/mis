@@ -1,7 +1,5 @@
 package com.syzc.mis.entity;
 
-import com.syzc.sseip.entity.enumtype.Role;
-
 import java.io.Serializable;
 import java.util.Date;
 
@@ -16,7 +14,6 @@ public class User implements Serializable {
     private String address;
     private String phone;
     private Date added;
-    private Role role;
     private Long groupId;
 
     private String limitedIp;
@@ -94,14 +91,6 @@ public class User implements Serializable {
 
     public void setAdded(Date added) {
         this.added = added;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
     }
 
     public Long getGroupId() {

@@ -1,17 +1,10 @@
 package com.syzc.mis.service.impl;
 
+import com.syzc.mis.dao.mysql.BaseDao;
+import com.syzc.mis.dao.mysql.UserDao;
+import com.syzc.mis.entity.User;
 import com.syzc.mis.service.UserService;
-import com.syzc.sseip.dao.BaseDao;
-import com.syzc.sseip.dao.UserDao;
-import com.syzc.sseip.dao.UserLogonQueryDto;
-import com.syzc.sseip.entity.User;
-import com.syzc.sseip.entity.UserLogon;
-import com.syzc.sseip.entity.UserLogonDto;
-import com.syzc.sseip.entity.enumtype.Role;
-import com.syzc.sseip.service.BaseServiceImpl;
-import com.syzc.sseip.util.LocalAcUtil;
-import com.syzc.sseip.util.Page;
-import com.syzc.sseip.util.PageUtil;
+import com.syzc.util.LocalAcUtil;
 import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
@@ -94,32 +87,6 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDao> implements U
         return userDao.updateResetPassword(userId, newPassword);
     }
 
-    @Override
-    public Page<User> listByGroup(Long groupId, Long pageNo, Byte size) {
-        Long total = userDao.countByGroup(groupId);
-        Page<User> page = PageUtil.make(pageNo, size, total);
-        page.setList(userDao.listByGroup(groupId, page.getRowOffset(), page.getPageSize()));
-        return page;
-    }
-
-    @Override
-    public Page<User> listByRole(Role role, Long pageNo, Byte size) {
-        Long total = userDao.countByRole(role);
-        Page<User> page = PageUtil.make(pageNo, size, total);
-        page.setList(userDao.listByRole(role, page.getRowOffset(), page.getPageSize()));
-        return page;
-    }
-
-    @Override
-    public Boolean leaveGroup(Long userId) {
-        return userDao.updateGroup(userId, null);
-    }
-
-    @Override
-    public Boolean changeGroup(Long userId, Long groupId) {
-        return userDao.updateGroup(userId, groupId);
-    }
-
     public Boolean exist(String username) {
         return userDao.existUsername(username);
     }
@@ -127,53 +94,6 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDao> implements U
     @Override
     public User login(String userName, String password, String ip) {
         return userDao.login(userName, password, ip);
-    }
-
-    @Override
-    public Boolean updateRole(Long userId, Role role) {
-        return userDao.updateRole(userId, role);
-    }
-
-    @Override
-    public Boolean updateLimitedIp(Long userId, String ip) {
-        return userDao.updateLimitedIp(userId, ip);
-    }
-
-    @Override
-    public Role getRole(Long userId) {
-        return userDao.getRole(userId);
-    }
-
-    @Override
-    public Boolean saveLogonInfo(UserLogon userLogon) {
-        return userDao.insertUserLogon(userLogon);
-    }
-
-    @Override
-    public Page<UserLogon> listUserLogonByUser(Long userId, Long pageNo, Short size) {
-        Long count = userDao.countUserLogonByUser(userId);
-        Page page;
-        page = PageUtil.make(pageNo, (long) size, count);
-        if (count > 0) {
-            page.setList(userDao.listUserLogonByUser(userId, page.getRowOffset(), (short) page.getPageSize()));
-        }
-        return page;
-    }
-
-    @Override
-    public List<User> listAllByGroup(Long groupId) {
-        return userDao.listAllByGroup(groupId);
-    }
-
-    @Override
-    public Page<UserLogonDto> filterUserLogon(UserLogonQueryDto query, Long pageNo, Short size) {
-        Long count = userDao.countFilterUserLogon(query);
-        Page page;
-        page = PageUtil.make(pageNo, (long) size, count);
-        if (count > 0) {
-            page.setList(userDao.filterUserLogon(query, page.getRowOffset(), (short) page.getPageSize()));
-        }
-        return page;
     }
 
     public static void main(String[] args) {

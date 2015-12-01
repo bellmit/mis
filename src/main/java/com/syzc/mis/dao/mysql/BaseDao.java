@@ -1,4 +1,4 @@
-package com.syzc.mis.dao;
+package com.syzc.mis.dao.mysql;
 
 import org.apache.ibatis.annotations.Param;
 
