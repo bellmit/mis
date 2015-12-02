@@ -18,4 +18,44 @@ public class BloodTest {
     private Float leukocyteAmount;
     //血小板
     private Float plateletAmount;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Float getErythrocyteAmount() {
+        return erythrocyteAmount;
+    }
+
+    public void setErythrocyteAmount(Float erythrocyteAmount) {
+        this.erythrocyteAmount = erythrocyteAmount;
+    }
+
+    public Float getHemoglobinAmount() {
+        return hemoglobinAmount;
+    }
+
+    public void setHemoglobinAmount(Float hemoglobinAmount) {
+        this.hemoglobinAmount = hemoglobinAmount;
+    }
+
+    public Float getLeukocyteAmount() {
+        return leukocyteAmount;
+    }
+
+    public void setLeukocyteAmount(Float leukocyteAmount) {
+        this.leukocyteAmount = leukocyteAmount;
+    }
+
+    public Float getPlateletAmount() {
+        return plateletAmount;
+    }
+
+    public void setPlateletAmount(Float plateletAmount) {
+        this.plateletAmount = plateletAmount;
+    }
 }

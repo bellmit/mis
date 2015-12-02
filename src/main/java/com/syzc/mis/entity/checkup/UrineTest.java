@@ -19,4 +19,44 @@ public class UrineTest {
     private Float protein24Amount;
     //红细胞计数
     private Float erythrocyteAmount;
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public Sign getProteinuriaDs() {
+        return ProteinuriaDs;
+    }
+
+    public void setProteinuriaDs(Sign proteinuriaDs) {
+        ProteinuriaDs = proteinuriaDs;
+    }
+
+    public Sign getUrineOccultBloodDs() {
+        return urineOccultBloodDs;
+    }
+
+    public void setUrineOccultBloodDs(Sign urineOccultBloodDs) {
+        this.urineOccultBloodDs = urineOccultBloodDs;
+    }
+
+    public Float getProtein24Amount() {
+        return protein24Amount;
+    }
+
+    public void setProtein24Amount(Float protein24Amount) {
+        this.protein24Amount = protein24Amount;
+    }
+
+    public Float getErythrocyteAmount() {
+        return erythrocyteAmount;
+    }
+
+    public void setErythrocyteAmount(Float erythrocyteAmount) {
+        this.erythrocyteAmount = erythrocyteAmount;
+    }
 }
