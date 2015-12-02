@@ -14,7 +14,7 @@ public interface BaseService<T, Q extends BaseDao<T>> {
 
     T get(Long id);
 
-    Page<T> list(Long pageNo, Byte size);
+    Page<T> list(Integer pageNo, Integer size);
 
     List<T> listAll();
 }

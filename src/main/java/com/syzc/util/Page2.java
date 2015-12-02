@@ -3,40 +3,48 @@ package com.syzc.util;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Page<T> {
+public class Page2<T> {
     /**
      * pageNo start from 1
      */
-    Integer pageNo;
-    Integer maxPageNo;
+    Long pageNo;
+    Long maxPageNo;
     Long totalRows;
-    Integer pageSize;
+    Byte pageSize;
     /**
      * rowOffset start from 0
      */
     Long rowOffset;
     List<T> list = new LinkedList<>();
 
-    public Page(Long totalRows) {
+    public Page2(Long totalRows) {
         this.totalRows = totalRows;
     }
 
-    public Page() {
+    public Page2() {
     }
 
-    public Integer getPageNo() {
+    public boolean isFirstPage() {
+        return pageNo == 1;
+    }
+
+    public boolean isLastPage() {
+        return pageNo.equals(maxPageNo);
+    }
+
+    public Long getPageNo() {
         return pageNo;
     }
 
-    public void setPageNo(Integer pageNo) {
+    public void setPageNo(Long pageNo) {
         this.pageNo = pageNo;
     }
 
-    public Integer getMaxPageNo() {
+    public Long getMaxPageNo() {
         return maxPageNo;
     }
 
-    public void setMaxPageNo(Integer maxPageNo) {
+    public void setMaxPageNo(Long maxPageNo) {
         this.maxPageNo = maxPageNo;
     }
 
@@ -48,20 +56,12 @@ public class Page<T> {
         this.totalRows = totalRows;
     }
 
-    public Integer getPageSize() {
+    public Byte getPageSize() {
         return pageSize;
     }
 
-    public void setPageSize(Integer pageSize) {
+    public void setPageSize(Byte pageSize) {
         this.pageSize = pageSize;
-    }
-
-    public boolean isFirstPage() {
-        return pageNo == 1;
-    }
-
-    public boolean isLastPage() {
-        return pageNo.equals(maxPageNo);
     }
 
     public List<T> getList() {

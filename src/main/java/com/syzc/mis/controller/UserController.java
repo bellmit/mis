@@ -28,7 +28,7 @@ import java.util.regex.Pattern;
 public class UserController {
     protected static final Pattern idNPattern = Pattern.compile("\\d{17}[\\dxX]");
     private static final Logger logger = Logger.getLogger(UserController.class);
-    public final Byte pageSize = 20;
+    public final Integer pageSize = 20;
     public final Short pageSizeS = 20;
 
     private UserService userService;
@@ -173,7 +173,7 @@ public class UserController {
     }
 
     @RequestMapping("/list/{page:\\d+}")
-    public String list(@PathVariable("page") Long pageNo, Model model, HttpSession session) {
+    public String list(@PathVariable("page") Integer pageNo, Model model, HttpSession session) {
         Page<User> page;
 //        page = userService.listByGroup(loginUser.getGroupId(), pageNo, pageSize);
         page = userService.list(pageNo, pageSize);

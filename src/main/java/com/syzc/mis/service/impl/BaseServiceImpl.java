@@ -26,9 +26,9 @@ public abstract class BaseServiceImpl<T, Q extends BaseDao<T>> implements BaseSe
     }
 
     @Override
-    public Page<T> list(Long pageNo, Byte size) {
+    public Page<T> list(Integer pageNo, Integer size) {
         Long total = getDao().count();
-        Page<T> page = PageUtil.make(pageNo, (long) size, total);
+        Page<T> page = PageUtil.make(pageNo, size, total);
         page.setList(getDao().list(page.getRowOffset(), page.getPageSize()));
         return page;
     }

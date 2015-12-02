@@ -15,7 +15,7 @@ public interface BaseDao<T> {
 
     T get(Long id);
 
-    List<T> list(@Param("offset") Long offset, @Param("size") Byte size);
+    List<T> list(@Param("offset") Long offset, @Param("size") Integer size);
 
     List<T> listAll();
 

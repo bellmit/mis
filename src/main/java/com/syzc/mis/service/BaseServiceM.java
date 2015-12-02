@@ -1,21 +1,19 @@
 package com.syzc.mis.service;
 
+import com.syzc.mis.entity.filter.BaseFilter;
 import com.syzc.util.Page;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-import java.io.Serializable;
 import java.util.List;
 
-public interface BaseServiceM<T, ID extends Serializable, Q extends PagingAndSortingRepository<T, ID>> {
-    void add(T entity);
+public interface BaseServiceM<T, Q extends PagingAndSortingRepository<T, String>> {
+    T save(T entity);
 
-    void save(T entity);
+    void delete(String id);
 
-    Boolean delete(Long id);
+    T findOne(String id);
 
-    T find(String id);
+    Page<T> findAll(Integer pageNo, Integer size);
 
-    Page<T> findAll(Long pageNo, Byte size);
-
-    List<T> filter();
+    List<T> filter(BaseFilter filter, Long pageNo, Integer size);
 }
