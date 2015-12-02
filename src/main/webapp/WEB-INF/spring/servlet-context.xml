@@ -44,8 +44,8 @@
                 class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
         <beans:property name="converters">
             <beans:set>
-                <beans:bean class="com.syzc.mis.controller.converters.RoleConverter"/>
                 <beans:bean class="com.syzc.mis.controller.converters.SexConverter"/>
+                <beans:bean class="com.syzc.mis.controller.converters.SignConverter"/>
             </beans:set>
         </beans:property>
     </beans:bean>

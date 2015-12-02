@@ -49,7 +49,7 @@
         ,sex = #{entity.sex}
         WHERE id = #{entity.id};
     </update>
-    <select id="get" resultMap="UserDto">
+    <select id="get" resultMap="User">
         SELECT
         *
         FROM user

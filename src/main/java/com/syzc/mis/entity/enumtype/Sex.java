@@ -8,19 +8,19 @@ import java.util.Map;
 public enum Sex {
     FEMALE(1, "女性"), MALE(2, "男性");
     protected int code;
-    protected String textName;
+    protected String text;
 
-    Sex(int code, String textName) {
+    Sex(int code, String text) {
         this.code = code;
-        this.textName = textName;
+        this.text = text;
     }
 
     public int getCode() {
         return code;
     }
 
-    public String getTextName() {
-        return textName;
+    public String getText() {
+        return text;
     }
 
     public static Sex get(Integer code) {
@@ -41,7 +41,7 @@ public enum Sex {
     public static void main(String[] args) {
         System.out.println(JSON.toJSONString(Sex.values(), true));
         for (Sex w : Sex.values()) {
-            System.out.println(w.getTextName());
+            System.out.println(w.getText());
             System.out.println(w.getCode());
         }
     }

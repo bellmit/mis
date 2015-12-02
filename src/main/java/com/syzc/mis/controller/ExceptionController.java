@@ -27,6 +27,6 @@ public class ExceptionController {
             logger.debug(ex);
         }
         request.setAttribute("ex", ex);
-        return "exception-caught";
+        return "/exception-caught";
     }
 }

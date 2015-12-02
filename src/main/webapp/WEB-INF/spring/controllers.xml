@@ -22,11 +22,6 @@ http://www.springframework.org/schema/mvc http://www.springframework.org/schema/
             <mvc:exclude-mapping path="/resources/**"/>
             <bean class="com.syzc.mis.controller.LoginInterceptor"/>
         </mvc:interceptor>
-        <mvc:interceptor>
-            <mvc:mapping path="/**"/>
-            <mvc:exclude-mapping path="/resources/**"/>
-            <bean class="com.syzc.mis.controller.AccessLogInterceptor"/>
-        </mvc:interceptor>
     </mvc:interceptors>
 
     <!--一个全局异常解析器简单实例， 可以使用 controller advice 标注的自定义控制器代替-->

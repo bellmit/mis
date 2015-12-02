@@ -67,7 +67,7 @@ public class UserController {
         }
 
         model.addAttribute("user", user);
-        return "/profile-self";
+        return "/user-profile";
     }
 
     @RequestMapping(value = "update-password", method = RequestMethod.GET)
