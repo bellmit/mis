@@ -6,9 +6,11 @@ import com.syzc.mis.entity.User;
 public interface UserService extends BaseService<User, UserDao> {
     Boolean updateInfo(User user);
 
-    Boolean updatePassword(Long userId, String oldPassword, String newPassword);
+    Boolean updatePassword(String username, String oldPassword, String newPassword);
 
     Boolean updateResetPassword(Long userId, String newPassword);
 
-    User login(String userName, String password, String ip);
+    User login(String userName, String password);
+
+    Boolean exists(String username);
 }

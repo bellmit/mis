@@ -11,18 +11,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
-import javax.imageio.ImageIO;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.regex.Pattern;
 
 @Controller
-@RequestMapping("/login")
 public class LoginController {
     private static final Logger logger = Logger.getLogger(LoginController.class);
     @Resource
@@ -34,24 +27,36 @@ public class LoginController {
         this.userService = userService;
     }
 
-/*
     public void setProducer(Producer producer) {
         this.producer = producer;
     }
-*/
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
-    public String login(@RequestParam(required = false) String refer, HttpSession httpSession) {
-        if (httpSession.getAttribute("loginUserId") != null) {
-            if (refer == null || refer.length() == 0) {
-                refer = "/";
-            }
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login(@RequestParam(defaultValue = "/") String refer, HttpSession session) {
+        if (session.getAttribute("loginUserId") != null) {
             return "redirect:" + refer;
         }
         return "/login";
     }
 
-    @RequestMapping(value = "", method = RequestMethod.POST)
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String login(String username, String password, @RequestParam(defaultValue = "/welcome") String refer,
+                        HttpSession session, Model model) {
+        User login = userService.login(username, password);
+        if (login == null) {
+            model.addAttribute("error", "用户名或者密码或者接入IP有错误。是不是忘了？");
+
+            return "/login";
+        }
+
+        session.setAttribute("loginUser", login);
+        session.setAttribute("loginUserId", login.getId());
+        return "redirect:" + refer;
+//        ContextLoader.getCurrentWebApplicationContext().getServletContext().getServletContextName()
+    }
+
+/*
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(@RequestParam("captcha") String captcha, @RequestParam("username") String username,
                         @RequestParam("password") String password, @RequestParam(required = false) String refer,
                         HttpSession httpSession, Model model, HttpServletRequest request) {
@@ -89,14 +94,16 @@ public class LoginController {
         }
         return "redirect:/welcome";
     }
+*/
 
     @RequestMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
-//        return "/logout";
+//        return "/logout"; // View
         return "redirect:/login";
     }
 
+/*
     @RequestMapping("/captcha")
     public String captcha(HttpSession session, HttpServletResponse response) throws IOException {
         String text = producer.createText();
@@ -109,18 +116,15 @@ public class LoginController {
         response.getOutputStream().close();
         return null;
     }
+*/
 
-    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    //    @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String register() {
         return "/register";
     }
 
-    protected static final Pattern idNPattern = Pattern.compile("\\d{17}[\\dxX]");
-
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    //    @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String register(@RequestParam("captcha") String captcha, User form, @RequestParam("confirmPwd") String confirmPwd, Model model, HttpSession httpSession) {
-//        logger.trace(JSON.toJSONString(form, true));
-//        logger.trace(captcha);
         String kaptcha = (String) httpSession.getAttribute("kaptcha");
 
         if (!captcha.equals(kaptcha)) {
@@ -134,23 +138,6 @@ public class LoginController {
             errors.add("密码不匹配");
             state = false;
         }
-
-/*
-        Matcher m = idNPattern.matcher(form.getIdNumber());
-        if (!m.matches()) {
-            errors.add("身份证号码格式错误");
-            logger.trace("错误的身份证号码: " + form.getIdNumber());
-            state = false;
-        }
-
-        int age = form.getAge();
-        int calcAge = AgeUtil.calc(form.getIdNumber());
-        if (age != calcAge) {
-            errors.add("身份证年龄不匹配");
-            logger.trace(String.format("错误的身份证号码与年龄关系: %s,\t%s", form.getIdNumber(), age));
-            state = false;
-        }
-*/
 
         if (!state) {
 //            System.out.println(JSON.toJSONString(errors, true));

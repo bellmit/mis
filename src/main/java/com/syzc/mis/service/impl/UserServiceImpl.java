@@ -10,7 +10,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 @Service
 public class UserServiceImpl extends BaseServiceImpl<User, UserDao> implements UserService {
@@ -74,12 +73,12 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDao> implements U
 
     @Override
     public Boolean updateInfo(User user) {
-        return userDao.updateInfo(user);
+        return userDao.update(user);
     }
 
     @Override
-    public Boolean updatePassword(Long userId, String oldPassword, String newPassword) {
-        return userDao.updatePassword(userId, oldPassword, newPassword);
+    public Boolean updatePassword(String username, String oldPassword, String newPassword) {
+        return userDao.updatePassword(username, oldPassword, newPassword);
     }
 
     @Override
@@ -87,13 +86,13 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDao> implements U
         return userDao.updateResetPassword(userId, newPassword);
     }
 
-    public Boolean exist(String username) {
-        return userDao.existUsername(username);
+    public Boolean exists(String username) {
+        return userDao.existsUsername(username);
     }
 
     @Override
-    public User login(String userName, String password, String ip) {
-        return userDao.login(userName, password, ip);
+    public User login(String username, String password) {
+        return userDao.getLogin(username, password);
     }
 
     public static void main(String[] args) {

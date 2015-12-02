@@ -6,6 +6,7 @@ import com.syzc.mis.entity.Profile;
 import com.syzc.mis.entity.checkup.BloodTest;
 import com.syzc.mis.entity.disease.Hspn;
 import com.syzc.mis.entity.enumtype.Sex;
+import com.syzc.mis.entity.report.HspnCheckup;
 import com.syzc.util.LocalAcUtil;
 
 import java.util.Date;
@@ -14,12 +15,15 @@ public class HspnRepoTestC {
     public static void main(String[] args) {
         System.out.println(JSON.toJSONString(LocalAcUtil.getAc().getBeanDefinitionNames(), true));
         HspnRepo repo = (HspnRepo) LocalAcUtil.getAc().getBean("hspnRepo");
-        System.out.println(JSON.toJSONString(repo.findAll(), true));
+        System.out.println(JSON.toJSONString(repo.findAll()));
         Hspn hspn = new Hspn();
         Hspn result;
 
+        HspnCheckup checkup = new HspnCheckup();
+        hspn.setBefore(checkup);
+
         BloodTest bloodTest = new BloodTest();
-        hspn.setBloodTest(bloodTest);
+        checkup.setBloodTest(bloodTest);
         bloodTest.setErythrocyteAmount(2.3f);
         bloodTest.setHemoglobinAmount(3.2f);
         bloodTest.setLeukocyteAmount(4.3f);

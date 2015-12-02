@@ -5,6 +5,7 @@ import com.syzc.mis.dao.repo.HspnRepo;
 import com.syzc.mis.entity.Profile;
 import com.syzc.mis.entity.checkup.BloodTest;
 import com.syzc.mis.entity.disease.Hspn;
+import com.syzc.mis.entity.report.HspnCheckup;
 import com.syzc.util.LocalAcUtil;
 
 public class HspnRepoTestA {
@@ -15,8 +16,11 @@ public class HspnRepoTestA {
         Hspn hspn = new Hspn();
         Hspn result;
 
+        HspnCheckup checkup = new HspnCheckup();
+        hspn.setBefore(checkup);
+
         BloodTest bloodTest = new BloodTest();
-        hspn.setBloodTest(bloodTest);
+        checkup.setBloodTest(bloodTest);
 
         Profile profile = new Profile();
         hspn.setProfile(profile);

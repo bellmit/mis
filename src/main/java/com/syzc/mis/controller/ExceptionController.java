@@ -16,7 +16,7 @@ public class ExceptionController {
 
     @RequestMapping(value = "/login/e")
     String e() throws Exception {
-        throw new Exception("自定义抛出异常");
+        throw new Exception("抛出自定义异常");
     }
 
     @ExceptionHandler({Exception.class, HosException.class})

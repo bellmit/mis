@@ -1,25 +1,19 @@
 package com.syzc.mis.entity;
 
+import com.syzc.mis.entity.enumtype.Sex;
+
 import java.io.Serializable;
 import java.util.Date;
 
 public class User implements Serializable {
-    private static final long serialVersionUID = -1908603717212037867L;
     private Long id;
     private String username;
     private String password;
     private String realName;
     private Integer age;
-    private String idNumber;
-    private String address;
     private String phone;
+    private Sex sex;
     private Date added;
-    private Long groupId;
-
-    private String limitedIp;
-
-    public User() {
-    }
 
     public Long getId() {
         return id;
@@ -61,22 +55,6 @@ public class User implements Serializable {
         this.age = age;
     }
 
-    public String getIdNumber() {
-        return idNumber;
-    }
-
-    public void setIdNumber(String idNumber) {
-        this.idNumber = idNumber;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
     public String getPhone() {
         return phone;
     }
@@ -85,27 +63,19 @@ public class User implements Serializable {
         this.phone = phone;
     }
 
+    public Sex getSex() {
+        return sex;
+    }
+
+    public void setSex(Sex sex) {
+        this.sex = sex;
+    }
+
     public Date getAdded() {
         return added;
     }
 
     public void setAdded(Date added) {
         this.added = added;
-    }
-
-    public Long getGroupId() {
-        return groupId;
-    }
-
-    public void setGroupId(Long groupId) {
-        this.groupId = groupId;
-    }
-
-    public String getLimitedIp() {
-        return limitedIp;
-    }
-
-    public void setLimitedIp(String limitedIp) {
-        this.limitedIp = limitedIp;
     }
 }
