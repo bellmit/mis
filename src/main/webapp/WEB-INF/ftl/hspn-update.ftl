@@ -1,10 +1,19 @@
 <!doctype html>
 <html>
 <head>
-<#include "/common/common_css.ftl">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link href="/resources/components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/resources/components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+    <link href="/resources/startbootstrap/css/sb-admin-2.css" rel="stylesheet">
+    <link href="/resources/components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <!--daterangepicker-->
-    <link rel="stylesheet" href="${context.contextPath}/resources/self/daterangepicker.css"/>
+    <link rel="stylesheet" href="/resources/self/daterangepicker.css"/>
 
     <title>顾客资料编辑</title>
     <style>
@@ -19,7 +28,7 @@
         <ul class="breadcrumb">
             <li>
                 <span class="ace-icon fa fa-home home-icon"></span>
-                <a href="${context.contextPath}/" target="_top">Home</a>
+                <a href="/" target="_top">Home</a>
             </li>
             <li class="active">过敏性紫癜肾炎患者检查表 <a href="" title="刷新"><span class="fa fa-refresh"></span></a></li>
         </ul>
@@ -69,7 +78,7 @@
                         <button class="btn btn-warning btn-sm" type="reset">
                             <span class="ace-icon fa fa-undo bigger-110"></span>重置
                         </button>
-                        <a class="btn btn-primary btn-sm" href="${(referer)!''}">
+                        <a class="btn btn-primary btn-sm" href="${(referer)!'/default'}">
                             <span class="ace-icon fa fa-back bigger-110"></span>返回来源页
                         </a>
                     </div>
@@ -82,6 +91,115 @@
                 <h3>患者一般情况</h3>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">姓名</label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="姓名" title="姓名">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">入院时间</label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" id="admissionDate" name="admissionDate"
+                                   placeholder="入院时间" title="入院时间">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">性别</label>
+
+                        <div class="col-md-8">
+                            <label class="radio-inline"><input type="radio" name="sex" id="male"
+                                                               value="1" checked>女性</label>
+                            <label class="radio-inline"><input type="radio" name="sex" id="female"
+                                                               value="2">男性</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">出院时间</label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" id="dischargeDate" name="dischargeDate"
+                                   placeholder="出院时间" title="出院时间">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">年龄</label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" id="age" name="age"
+                                   placeholder="年龄" title="年龄">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">病区</label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" id="ward" name="ward"
+                                   placeholder="病区" title="病区">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">肾脏病理</label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" id="renalPathology" name="renalPathology"
+                                   placeholder="肾脏病理" title="肾脏病理">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">发病年龄</label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" id="ageOfOnset" name="ageOfOnset"
+                                   placeholder="发病年龄" title="发病年龄">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">住院编号</label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" id="patientId" name="patientId"
+                                   placeholder="住院编号" title="住院编号">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">血压</label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" id="bloodPressure" name="bloodPressure"
+                                   placeholder="血压" title="血压">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">过敏源</label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" id="allergens" name="allergens"
+                                   placeholder="过敏源" title="过敏源">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
 
         <div class="row">
             <div class="col-sm-12">
@@ -92,18 +210,23 @@
                             <button class="btn btn-warning btn-sm" type="reset">
                                 <span class="ace-icon fa fa-undo bigger-110"></span>重置
                             </button>
-                            <a class="btn btn-primary btn-sm" href="${(referer)!''}">
+                            <a class="btn btn-primary btn-sm" href="${(referer)!'/default'}">
                                 <span class="ace-icon fa fa-back bigger-110"></span>返回来源页
                             </a></span></div>
             </div>
         </div>
     </div>
-<#include "/common/common_js.ftl">
-    <script src="${context.contextPath}/resources/ace/assets/js/bootbox.js"></script>
+
+    <script src="/resources/components/jquery/dist/jquery.min.js"></script>
+    <script src="/resources/components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/resources/components/metisMenu/dist/metisMenu.min.js"></script>
+    <script src="/resources/startbootstrap/js/sb-admin-2.js"></script>
+
+    <script src="/resources/ace/assets/js/bootbox.js"></script>
 
     <!--daterangepicker-->
-    <script src="${context.contextPath}/resources/self/moment.min.js"></script>
-    <script src="${context.contextPath}/resources/self/daterangepicker.js"></script>
+    <script src="/resources/self/moment.min.js"></script>
+    <script src="/resources/self/daterangepicker.js"></script>
 
     <script type="text/javascript">
         $(function () {

@@ -30,6 +30,7 @@ public class Profile {
     private String ward;
     private String patientId;
     private String bloodPressure;
+    //过敏原
     private String allergens;
     private String renalPathology;
 
