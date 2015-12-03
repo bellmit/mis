@@ -3,6 +3,7 @@ package com.syzc.mis.entity;
 import com.syzc.mis.entity.enumtype.Sex;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -20,8 +21,10 @@ public class Profile {
     //发病年龄
     private Short ageOfOnset;
     //入院日期
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date admissionDate;
     //出院日期
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dischargeDate;
     //病区
     private String ward;

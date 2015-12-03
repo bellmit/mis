@@ -1,13 +1,10 @@
 package com.syzc.mis.service;
 
-import com.syzc.mis.entity.filter.BaseFilter;
 import com.syzc.util.Page;
 import com.syzc.util.PageUtil;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.repository.PagingAndSortingRepository;
-
-import java.util.List;
 
 public abstract class BaseServiceMImpl<T, Q extends PagingAndSortingRepository<T, String>> implements BaseServiceM<T, Q> {
     MongoTemplate mongoTemplate;
@@ -42,10 +39,5 @@ public abstract class BaseServiceMImpl<T, Q extends PagingAndSortingRepository<T
         Page page = PageUtil.make(pageNo, size, total);
         page.setList(repo.findAll(new PageRequest(page.getPageNo() - 1, page.getPageSize())).getContent());
         return page;
-    }
-
-    @Override
-    public List<T> filter(BaseFilter filter, Long pageNo, Integer size) {
-        return null;
     }
 }

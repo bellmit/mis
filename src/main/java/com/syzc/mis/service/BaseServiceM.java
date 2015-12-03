@@ -1,10 +1,9 @@
 package com.syzc.mis.service;
 
+import com.syzc.mis.entity.disease.Hspn;
 import com.syzc.mis.entity.filter.BaseFilter;
 import com.syzc.util.Page;
 import org.springframework.data.repository.PagingAndSortingRepository;
-
-import java.util.List;
 
 public interface BaseServiceM<T, Q extends PagingAndSortingRepository<T, String>> {
     T save(T entity);
@@ -15,5 +14,5 @@ public interface BaseServiceM<T, Q extends PagingAndSortingRepository<T, String>
 
     Page<T> findAll(Integer pageNo, Integer size);
 
-    List<T> filter(BaseFilter filter, Long pageNo, Integer size);
+    Page<T> filter(BaseFilter filter, Integer pageNo, Integer size);
 }

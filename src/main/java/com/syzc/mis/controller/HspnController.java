@@ -2,6 +2,7 @@ package com.syzc.mis.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.syzc.mis.entity.disease.Hspn;
+import com.syzc.mis.entity.filter.BaseFilter;
 import com.syzc.mis.service.HspnService;
 import com.syzc.util.Page;
 import org.springframework.stereotype.Controller;
@@ -21,9 +22,18 @@ public class HspnController {
         this.hspnService = hspnService;
     }
 
-    @RequestMapping(value = "", produces = "application/json; charset=UTF-8")
+    @RequestMapping(value = "list", produces = "application/json; charset=UTF-8")
     @ResponseBody
     public String hspnList(@RequestParam(value = "page", defaultValue = "1") Integer pageNo, Model model) {
+        Page<Hspn> page = hspnService.findAll(pageNo, pageSize);
+        model.addAttribute("page", page);
+        return JSON.toJSONString(page, true);
+//        return "/hspn-list";
+    }
+
+    @RequestMapping(value = "", produces = "application/json; charset=UTF-8")
+    @ResponseBody
+    public String hspnFilter(@RequestParam(value = "page", defaultValue = "1") Integer pageNo, BaseFilter filter, Model model) {
         Page<Hspn> page = hspnService.findAll(pageNo, pageSize);
         model.addAttribute("page", page);
         return JSON.toJSONString(page, true);
