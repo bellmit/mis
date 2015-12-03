@@ -91,6 +91,16 @@
                 <h3>患者一般情况</h3>
             </div>
         </div>
+
+        <div class="col-lg-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">患者一般情况</div>
+                <div class="panel-body"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt
+                    est vitae ultrices
+                    accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p></div>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-md-3">
                 <div class="form-horizontal">
