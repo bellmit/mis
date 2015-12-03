@@ -42,7 +42,7 @@ public class HspnController {
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String hspnAdd() {
-        return "/hspn-add";
+        return "/hspn-update";
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
