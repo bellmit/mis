@@ -17,9 +17,7 @@ public class RenalFunction {
     //肾功能，血尿酸量
     private Float bloodUricAcidAmount;
     //胱抑素C量
-    private Float CystatinCAmount;
-    //内生肌酐清除率 CrCl; creatinine clearance
-    private Float crCl;
+    private Float cystatinCAmount;
 
     public void setId(String id) {
         this.id = id;
@@ -54,18 +52,10 @@ public class RenalFunction {
     }
 
     public Float getCystatinCAmount() {
-        return CystatinCAmount;
+        return cystatinCAmount;
     }
 
     public void setCystatinCAmount(Float cystatinCAmount) {
-        CystatinCAmount = cystatinCAmount;
-    }
-
-    public Float getCrCl() {
-        return crCl;
-    }
-
-    public void setCrCl(Float crCl) {
-        this.crCl = crCl;
+        this.cystatinCAmount = cystatinCAmount;
     }
 }

@@ -4,7 +4,9 @@ import com.alibaba.fastjson.JSON;
 import com.syzc.mis.entity.disease.Hspn;
 import com.syzc.mis.entity.filter.BaseFilter;
 import com.syzc.mis.service.HspnService;
+import com.syzc.util.HosException;
 import com.syzc.util.Page;
+import org.apache.log4j.Level;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -48,14 +50,17 @@ public class HspnController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String hspnAdd(Hspn hspn) {
         Hspn result = hspnService.save(hspn);
-        return "redirect:/hspn/update" + result.getId() + "?success-updated";
+        return "redirect:/hspn/update/" + result.getId() + "?success-updated";
     }
 
     @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
     public String hspnUpdate(@PathVariable String id, Model model) {
         Hspn one = hspnService.findOne(id);
+        if (one == null) {
+            throw HosException.create("找不到", Level.DEBUG);
+        }
         model.addAttribute("mcd", one);
-        return "/hspn-add";
+        return "/hspn-update";
     }
 
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
@@ -63,6 +68,6 @@ public class HspnController {
         hspn.setId(id);
         Hspn result = hspnService.save(hspn);
         model.addAttribute("mcd", result);
-        return "redirect:/hspn-update/" + id + "?success-added";
+        return "redirect:/hspn/update/" + id + "?success-added";
     }
 }

@@ -12,7 +12,7 @@ public class UrineTest {
     @Id
     private String id;
     //蛋白尿程度
-    private Sign ProteinuriaDs;
+    private Sign proteinuriaDs;
     //尿隐血程度
     private Sign urineOccultBloodDs;
     //24小时尿蛋白定量
@@ -29,11 +29,11 @@ public class UrineTest {
     }
 
     public Sign getProteinuriaDs() {
-        return ProteinuriaDs;
+        return proteinuriaDs;
     }
 
     public void setProteinuriaDs(Sign proteinuriaDs) {
-        ProteinuriaDs = proteinuriaDs;
+        this.proteinuriaDs = proteinuriaDs;
     }
 
     public Sign getUrineOccultBloodDs() {

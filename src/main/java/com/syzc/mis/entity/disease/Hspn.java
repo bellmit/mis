@@ -19,6 +19,7 @@ public class Hspn {
 
     private HspnCheckup before;
     private List<HspnCheckup> during;
+    private HspnCheckup during0;
     private HspnCheckup after;
 
     public String getId() {
@@ -59,5 +60,13 @@ public class Hspn {
 
     public void setAfter(HspnCheckup after) {
         this.after = after;
+    }
+
+    public HspnCheckup getDuring0() {
+        return during0;
+    }
+
+    public void setDuring0(HspnCheckup during0) {
+        this.during0 = during0;
     }
 }

@@ -20,6 +20,9 @@ public class HspnCheckup {
     private RenalScan renalScan;
     private UrineTest urineTest;
 
+    //内生肌酐清除率 CrCl; creatinine clearance
+    private Float crCl;
+
     private Date date;
 
     public String getId() {
@@ -92,5 +95,21 @@ public class HspnCheckup {
 
     public void setUrineTest(UrineTest urineTest) {
         this.urineTest = urineTest;
+    }
+
+    public Float getCrCl() {
+        return crCl;
+    }
+
+    public void setCrCl(Float crCl) {
+        this.crCl = crCl;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }
